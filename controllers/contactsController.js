@@ -10,3 +10,13 @@ module.exports.createContact = (req, res) => {
   const newContact = contactsDbInstace.createContact(body);
   res.status(201).send(newContact);
 };
+
+module.exports.getContactsById = (req, res) => {
+  const { id } = req.params;
+  const foundContacts = Contacts.getContactsById(id);
+  if (foundContacts) {
+    res.status(200).send(foundContacts);
+    return;
+  }
+  res.status(404).send('Contacts not found');
+};

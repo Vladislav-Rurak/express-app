@@ -13,7 +13,9 @@ app.use(express.json());
 // ----------------------------------
 
 app.get('/contacts', contactsController.getContacts);
-
 app.post('/contacts', contactsController.createContact);
+
+// параметры маршрута
+app.get('/contacts/:id', contactsController.getContactsById);
 
 module.exports = app;

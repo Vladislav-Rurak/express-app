@@ -11,3 +11,7 @@ Content-Type: application/json
     "telNumber": "+380123456789",
     "birthday": "2000-12-01"
   },
+
+###
+
+GET http://127.0.0.1:5000/contacts/0 HTTP/1.1
