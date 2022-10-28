@@ -1,4 +1,4 @@
-const Contacts = require('./../models');
+const Contacts = require('./../models/index');
 
 module.exports.getContacts = (req, res) => {
   const contacts = contactsDbInstace.getContacts();
@@ -19,4 +19,18 @@ module.exports.getContactsById = (req, res) => {
     return;
   }
   res.status(404).send('Contacts not found');
+};
+
+module.exports.updateContacts = (req, res) => {
+  const {
+    body,
+    params: { id },
+  } = req;
+
+  const updatedContact = Contacts.updateContact(id, body);
+
+  if (updatedContact) {
+    res.status(200).send(updatedContact);
+  }
+  res.status(404).send(' Contact Not Found');
 };

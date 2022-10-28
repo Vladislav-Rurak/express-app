@@ -18,4 +18,6 @@ app.post('/contacts', contactsController.createContact);
 // параметры маршрута
 app.get('/contacts/:id', contactsController.getContactsById);
 
+app.patch('/contacts/:id', contactsController.updateContacts);
+
 module.exports = app;

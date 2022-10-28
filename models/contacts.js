@@ -1,5 +1,7 @@
 const { format } = require('date-fns');
 
+// для генерации id удобно использовать пакет https://www.npmjs.com/package/uuid
+
 const contactsDB = [
   {
     id: 0,
@@ -30,23 +32,29 @@ class ContactsDB {
     return [...this.contacts];
   }
 
-  getContactsById (id) {
-    const foundIndex = this.contacts.findIndex(c => c.id === id);
+  getContactById (id) {
+    const foundIndex = this.contacts.findIndex(c => c.id === Number(id));
     return foundIndex === -1 ? null : this.contacts[foundIndex];
   }
 
   updateContact (id, values) {
-    const foundContactIndex = this.contacts.findIndex(c => c.id === id);
-    this.contacts[foundContactIndex] = {
-      ...this.contacts[foundContactIndex],
-      ...values,
-    };
-    return this.contacts[foundContactIndex];
+    const foundContactIndex = this.contacts.findIndex(c => c.id === Number(id));
+    if (foundContactIndex !== -1) {
+      this.contacts[foundContactIndex] = {
+        ...this.contacts[foundContactIndex],
+        ...values,
+      };
+    }
+
+    return foundContactIndex === -1 ? null : this.contacts[foundContactIndex];
   }
 
   deleteContact (id) {
-    const foundContactIndex = this.contacts.findIndex(c => c.id === id);
-    this.contacts.splice(foundContactIndex, 1);
+    const foundContactIndex = this.contacts.findIndex(c => c.id === Number(id));
+
+    return foundContactIndex === -1
+      ? null
+      : this.contacts.splice(foundContactIndex, 1);
   }
 }
 
